@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5ba34">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Questly">
+  <meta name="application-name" content="Questly">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./app-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./app-icon.svg">
+  <title>Questly</title>
+  <style>
+    :root {
+      --ink: #17181d;
+      --panel: #fff9ed;
+      --panel-2: #fff3d3;
+      --line: #302a20;
+      --teal: #0b8f8c;
+      --teal-soft: #caefea;
+      --coral: #f25f4c;
+      --gold: #f5ba34;
+      --lime: #79c94e;
+      --sky: #6db6f2;
+      --muted: #6d6458;
+      --shadow: 0 12px 0 rgba(23, 24, 29, .18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+      margin: 0;
+      font-family: Inter, "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(245, 186, 52, .18) 25%, transparent 25%) 0 0 / 28px 28px,
+        linear-gradient(225deg, rgba(11, 143, 140, .14) 25%, transparent 25%) 0 0 / 28px 28px,
+        #eef7ef;
+      letter-spacing: 0;
+    }
+
+    button {
+      border: 0;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .stage {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+    }
+
+    .phone {
+      width: min(100%, 420px);
+      height: min(900px, calc(100vh - 36px));
+      min-height: 720px;
+      border: 4px solid var(--line);
+      border-radius: 34px;
+      background: #fffaf0;
+      box-shadow: 0 18px 0 rgba(23, 24, 29, .25), 0 28px 50px rgba(23, 24, 29, .22);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      position: relative;
+    }
+
+    .topbar {
+      padding: 18px 16px 10px;
+      background:
+        linear-gradient(180deg, rgba(109, 182, 242, .42), transparent 78%),
+        #fef3d2;
+      border-bottom: 3px solid var(--line);
+    }
+
+    .status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .profile {
+      display: grid;
+      grid-template-columns: 48px minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--line);
+      border-radius: 14px;
+      background: var(--teal-soft);
+      box-shadow: 0 4px 0 rgba(23, 24, 29, .18);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .avatar svg {
+      width: 43px;
+      height: 43px;
+      display: block;
+    }
+
+    .player-name {
+      margin: 0 0 4px;
+      font-size: 18px;
+      line-height: 1.1;
+      font-weight: 900;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .rank {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .mini-badge {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--line);
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      background: var(--gold);
+    }
+
+    .mini-badge svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .wallet {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      padding: 7px 9px;
+      background: #fff;
+      border: 3px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 4px 0 rgba(23, 24, 29, .18);
+      font-size: 13px;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .coin-icon {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--line);
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: inset -3px -3px 0 rgba(197, 125, 27, .35);
+    }
+
+    .xp-wrap {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .xp-track {
+      height: 14px;
+      border: 3px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: inset 0 2px 0 rgba(23, 24, 29, .12);
+    }
+
+    .xp-fill {
+      width: 43%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--lime), var(--gold), var(--coral));
+      transition: width .25s ease;
+    }
+
+    .screen {
+      overflow: hidden;
+      position: relative;
+      background:
+        linear-gradient(180deg, #fffaf0 0%, #f8f1dc 100%);
+    }
+
+    .tab-panel {
+      height: 100%;
+      display: none;
+      overflow-y: auto;
+      padding: 16px 16px 92px;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    .quest-banner {
+      position: relative;
+      min-height: 154px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(135deg, #f8ce5d 0%, #f58f4b 52%, #37a99f 100%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .quest-banner::before {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 54px;
+      background:
+        linear-gradient(135deg, transparent 24px, rgba(255, 255, 255, .35) 0 28px, transparent 0) 0 0 / 56px 56px,
+        rgba(23, 24, 29, .08);
+    }
+
+    .banner-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 205px;
+    }
+
+    .kicker {
+      margin: 0 0 7px;
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(23, 24, 29, .72);
+      text-transform: uppercase;
+    }
+
+    .banner-copy h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .banner-copy p {
+      margin: 8px 0 0;
+      font-size: 13px;
+      line-height: 1.35;
+      font-weight: 800;
+      color: rgba(23, 24, 29, .78);
+    }
+
+    .map-art {
+      position: absolute;
+      right: -8px;
+      bottom: 2px;
+      width: 170px;
+      height: 142px;
+      z-index: 1;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 20px 0 10px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.1;
+    }
+
+    .pill {
+      padding: 6px 9px;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      box-shadow: 0 3px 0 rgba(23, 24, 29, .16);
+      white-space: nowrap;
+    }
+
+    .quests {
+      display: grid;
+      gap: 10px;
+    }
+
+    .quest-card {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) 44px;
+      align-items: center;
+      gap: 10px;
+      min-height: 82px;
+      padding: 10px;
+      background: #fff;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 6px 0 rgba(23, 24, 29, .16);
+      transition: transform .16s ease, box-shadow .16s ease, opacity .2s ease;
+    }
+
+    .quest-card.done {
+      opacity: .72;
+      transform: translateY(3px);
+      box-shadow: 0 3px 0 rgba(23, 24, 29, .16);
+    }
+
+    .quest-mark {
+      width: 46px;
+      height: 46px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--panel-2);
+    }
+
+    .quest-mark svg {
+      width: 25px;
+      height: 25px;
+      stroke-width: 3;
+    }
+
+    .quest-info {
+      min-width: 0;
+    }
+
+    .quest-info h3 {
+      margin: 0 0 5px;
+      font-size: 15px;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .reward-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--muted);
+    }
+
+    .complete-btn {
+      width: 44px;
+      height: 44px;
+      border: 3px solid var(--line);
+      border-radius: 12px;
+      background: var(--lime);
+      box-shadow: 0 4px 0 rgba(23, 24, 29, .2);
+      display: grid;
+      place-items: center;
+      transition: transform .12s ease, box-shadow .12s ease, background .2s ease;
+    }
+
+    .complete-btn:active {
+      transform: translateY(3px);
+      box-shadow: 0 1px 0 rgba(23, 24, 29, .2);
+    }
+
+    .quest-card.done .complete-btn {
+      background: #dad5c8;
+    }
+
+    .complete-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke-width: 4;
+    }
+
+    .loot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .loot {
+      min-height: 92px;
+      padding: 9px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 6px 0 rgba(23, 24, 29, .16);
+      display: grid;
+      align-content: space-between;
+      gap: 6px;
+    }
+
+    .loot-art {
+      height: 38px;
+      display: grid;
+      place-items: center;
+    }
+
+    .loot-art svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .loot strong {
+      display: block;
+      font-size: 12px;
+      line-height: 1.15;
+      text-align: center;
+    }
+
+    .map-card {
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: #d7f0dc;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      min-height: 430px;
+      position: relative;
+    }
+
+    .path-map {
+      width: 100%;
+      height: 430px;
+      display: block;
+    }
+
+    .map-note {
+      position: absolute;
+      left: 13px;
+      right: 13px;
+      bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .92);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .boss-btn {
+      width: 42px;
+      height: 42px;
+      border: 3px solid var(--line);
+      border-radius: 12px;
+      background: var(--coral);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 0 rgba(23, 24, 29, .2);
+      flex: 0 0 auto;
+    }
+
+    .boss-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .hero-panel {
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      padding: 14px;
+    }
+
+    .hero-top {
+      display: grid;
+      grid-template-columns: 96px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+    }
+
+    .big-avatar {
+      width: 96px;
+      height: 96px;
+      border: 3px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #caefea, #fff3d3);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 7px 0 rgba(23, 24, 29, .16);
+    }
+
+    .big-avatar svg {
+      width: 84px;
+      height: 84px;
+    }
+
+    .hero-stats h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .stat-track {
+      height: 12px;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: #fff4df;
+      overflow: hidden;
+    }
+
+    .stat-track span {
+      display: block;
+      height: 100%;
+      background: var(--teal);
+    }
+
+    .loadout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .gear-slot {
+      min-height: 96px;
+      padding: 10px 8px;
+      border: 3px dashed rgba(48, 42, 32, .55);
+      border-radius: 8px;
+      background: #fff9ed;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .gear-slot svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    .toast {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 82px;
+      min-height: 48px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 6px 0 rgba(23, 24, 29, .2);
+      font-weight: 900;
+      z-index: 5;
+      text-align: center;
+    }
+
+    .toast.show {
+      display: flex;
+      animation: pop .22s ease;
+    }
+
+    @keyframes pop {
+      from {
+        transform: translateY(8px) scale(.96);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    .nav {
+      height: 76px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 9px 12px 12px;
+      background: #fff9ed;
+      border-top: 3px solid var(--line);
+    }
+
+    .nav-btn {
+      border: 3px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 5px 0 rgba(23, 24, 29, .18);
+      display: grid;
+      grid-template-rows: 25px auto;
+      place-items: center;
+      gap: 1px;
+      font-size: 11px;
+      font-weight: 900;
+      min-width: 0;
+      transition: transform .12s ease, box-shadow .12s ease, background .16s ease;
+    }
+
+    .nav-btn svg {
+      width: 23px;
+      height: 23px;
+      stroke-width: 3;
+    }
+
+    .nav-btn.active {
+      background: var(--gold);
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 rgba(23, 24, 29, .18);
+    }
+
+    .nav-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 rgba(23, 24, 29, .18);
+    }
+
+    @media (max-width: 430px) {
+      .stage {
+        padding: 0;
+      }
+
+      .phone {
+        width: 100%;
+        height: 100vh;
+        min-height: 680px;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .quest-banner {
+        min-height: 148px;
+      }
+
+      .map-art {
+        width: 152px;
+        right: -18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <section class="phone" aria-label="Questly 手機 App 原型">
+      <header class="topbar">
+        <div class="status">
+          <div class="profile">
+            <div class="avatar" aria-hidden="true">
+              <svg viewBox="0 0 64 64" role="img">
+                <path d="M32 5l20 9v16c0 13-8 23-20 29C20 53 12 43 12 30V14l20-9z" fill="#f5ba34" stroke="#302a20" stroke-width="4"/>
+                <path d="M22 31c2-6 5-9 10-9s8 3 10 9c-2 5-5 8-10 8s-8-3-10-8z" fill="#fff9ed" stroke="#302a20" stroke-width="3"/>
+                <circle cx="32" cy="31" r="5" fill="#0b8f8c" stroke="#302a20" stroke-width="3"/>
+              </svg>
+            </div>
+            <div>
+              <p class="player-name">小隊長 Kai</p>
+              <div class="rank">
+                <span class="mini-badge" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3z"/>
+                  </svg>
+                </span>
+                Lv. 7 星港探險家
+              </div>
+            </div>
+          </div>
+          <div class="wallet" aria-live="polite">
+            <span class="coin-icon" aria-hidden="true"></span>
+            <span id="coins">420</span>
+          </div>
+        </div>
+        <div class="xp-wrap">
+          <span>XP</span>
+          <div class="xp-track" aria-label="等級進度">
+            <div class="xp-fill" id="xpFill"></div>
+          </div>
+          <span id="xpText">430/1000</span>
+        </div>
+      </header>
+
+      <div class="screen">
+        <section class="tab-panel active" data-panel="home">
+          <div class="quest-banner">
+            <div class="banner-copy">
+              <p class="kicker">今日主線</p>
+              <h1>清空三個任務格</h1>
+              <p>完成任務就能推進地圖，解鎖裝備和每日寶箱。</p>
+            </div>
+            <svg class="map-art" viewBox="0 0 170 142" aria-hidden="true">
+              <path d="M14 116c32-36 45-6 73-37s44-42 74-17" fill="none" stroke="#302a20" stroke-width="8" stroke-linecap="round" stroke-dasharray="2 17"/>
+              <circle cx="28" cy="105" r="15" fill="#fff9ed" stroke="#302a20" stroke-width="4"/>
+              <circle cx="84" cy="78" r="15" fill="#caefea" stroke="#302a20" stroke-width="4"/>
+              <circle cx="139" cy="51" r="20" fill="#f25f4c" stroke="#302a20" stroke-width="4"/>
+              <path d="M134 30l6-14 6 14 15 2-11 10 3 15-13-8-13 8 3-15-11-10 15-2z" fill="#f5ba34" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <div class="section-head">
+            <h2>任務板</h2>
+            <span class="pill" id="questCount">0/3 完成</span>
+          </div>
+
+          <div class="quests" id="questList">
+            <article class="quest-card" data-xp="120" data-coins="40">
+              <div class="quest-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0b8f8c" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19V5m0 0h14l-2.5 4L18 13H4"/>
+                </svg>
+              </div>
+              <div class="quest-info">
+                <h3>完成 25 分鐘專注</h3>
+                <div class="reward-row"><span>+120 XP</span><span>+40 金幣</span></div>
+              </div>
+              <button class="complete-btn" aria-label="完成任務">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+              </button>
+            </article>
+
+            <article class="quest-card" data-xp="90" data-coins="30">
+              <div class="quest-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#f25f4c" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 3v18M5 8h14M7 16h10"/>
+                </svg>
+              </div>
+              <div class="quest-info">
+                <h3>喝水 4 次</h3>
+                <div class="reward-row"><span>+90 XP</span><span>+30 金幣</span></div>
+              </div>
+              <button class="complete-btn" aria-label="完成任務">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+              </button>
+            </article>
+
+            <article class="quest-card" data-xp="160" data-coins="55">
+              <div class="quest-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#6db6f2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 7h16M6 7v11h12V7M9 7V5h6v2M9 11h6M9 15h4"/>
+                </svg>
+              </div>
+              <div class="quest-info">
+                <h3>整理今日待辦</h3>
+                <div class="reward-row"><span>+160 XP</span><span>+55 金幣</span></div>
+              </div>
+              <button class="complete-btn" aria-label="完成任務">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+              </button>
+            </article>
+          </div>
+
+          <div class="section-head">
+            <h2>今日掉落</h2>
+            <span class="pill">3 件可解鎖</span>
+          </div>
+
+          <div class="loot-grid">
+            <div class="loot">
+              <div class="loot-art" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                  <path d="M8 17h32v22H8z" fill="#f5ba34" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
+                  <path d="M5 13h38v9H5z" fill="#f25f4c" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
+                  <path d="M24 13v26" stroke="#302a20" stroke-width="4"/>
+                </svg>
+              </div>
+              <strong>寶箱券</strong>
+            </div>
+            <div class="loot">
+              <div class="loot-art" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                  <path d="M24 5l15 9v12c0 9-6 15-15 18C15 41 9 35 9 26V14l15-9z" fill="#caefea" stroke="#302a20" stroke-width="4"/>
+                  <path d="M18 25l4 4 9-11" fill="none" stroke="#302a20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <strong>護盾</strong>
+            </div>
+            <div class="loot">
+              <div class="loot-art" aria-hidden="true">
+                <svg viewBox="0 0 48 48">
+                  <path d="M16 29L32 9l-3 15h9L22 44l3-15z" fill="#f5ba34" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <strong>加速石</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="tab-panel" data-panel="map">
+          <div class="section-head">
+            <h2>冒險地圖</h2>
+            <span class="pill">第 2 區</span>
+          </div>
+          <div class="map-card">
+            <svg class="path-map" viewBox="0 0 360 430" aria-label="任務地圖">
+              <rect width="360" height="430" fill="#d7f0dc"/>
+              <path d="M-20 326c54-29 78-20 123-47 52-31 49-69 103-91 48-20 84-1 174-60" fill="none" stroke="#fff9ed" stroke-width="48" stroke-linecap="round"/>
+              <path d="M-20 326c54-29 78-20 123-47 52-31 49-69 103-91 48-20 84-1 174-60" fill="none" stroke="#302a20" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
+              <path d="M20 352l52-42 18 29 44-59 28 32 58-80 42 24 75-93" fill="none" stroke="#0b8f8c" stroke-width="8" stroke-linecap="round" opacity=".35"/>
+              <g>
+                <circle cx="52" cy="309" r="24" fill="#79c94e" stroke="#302a20" stroke-width="4"/>
+                <path d="M42 309l7 7 15-17" fill="none" stroke="#302a20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+              <g>
+                <circle cx="132" cy="266" r="24" fill="#79c94e" stroke="#302a20" stroke-width="4"/>
+                <path d="M122 266l7 7 15-17" fill="none" stroke="#302a20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+              <g>
+                <circle cx="206" cy="190" r="27" fill="#f5ba34" stroke="#302a20" stroke-width="4"/>
+                <path d="M206 174l5 11 12 2-9 8 2 13-10-6-11 6 2-13-9-8 12-2 6-11z" fill="#fff9ed" stroke="#302a20" stroke-width="3" stroke-linejoin="round"/>
+              </g>
+              <g>
+                <circle cx="304" cy="142" r="31" fill="#f25f4c" stroke="#302a20" stroke-width="4"/>
+                <path d="M292 150c7-20 17-20 24 0" fill="none" stroke="#302a20" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="296" cy="136" r="3" fill="#302a20"/>
+                <circle cx="312" cy="136" r="3" fill="#302a20"/>
+              </g>
+              <path d="M13 83c21-11 36-8 50 9 21-32 50-37 86-17 17-35 54-43 91-20 30-31 64-30 103 1" fill="none" stroke="#6db6f2" stroke-width="30" stroke-linecap="round" opacity=".45"/>
+              <path d="M31 99h53M189 65h76M270 83h56" stroke="#302a20" stroke-width="5" stroke-linecap="round" opacity=".2"/>
+            </svg>
+            <div class="map-note">
+              <span>再完成 2 個任務挑戰關主</span>
+              <button class="boss-btn" aria-label="挑戰關主">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M13 2L4 14h8l-1 8 9-12h-8l1-8z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="tab-panel" data-panel="hero">
+          <div class="section-head">
+            <h2>角色</h2>
+            <span class="pill">戰力 1840</span>
+          </div>
+          <div class="hero-panel">
+            <div class="hero-top">
+              <div class="big-avatar" aria-hidden="true">
+                <svg viewBox="0 0 96 96">
+                  <path d="M48 8l30 14v24c0 19-12 34-30 43C30 80 18 65 18 46V22L48 8z" fill="#f5ba34" stroke="#302a20" stroke-width="5"/>
+                  <path d="M32 48c3-11 9-16 16-16s13 5 16 16c-3 9-8 14-16 14s-13-5-16-14z" fill="#fff9ed" stroke="#302a20" stroke-width="4"/>
+                  <circle cx="48" cy="48" r="8" fill="#0b8f8c" stroke="#302a20" stroke-width="4"/>
+                  <path d="M25 24l13 9M71 24l-13 9" stroke="#302a20" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="hero-stats">
+                <h2>Kai</h2>
+                <div class="stat-row"><span>專注</span><div class="stat-track"><span style="width: 78%"></span></div></div>
+                <div class="stat-row"><span>體力</span><div class="stat-track"><span style="width: 62%; background: #f25f4c"></span></div></div>
+                <div class="stat-row"><span>連擊</span><div class="stat-track"><span style="width: 51%; background: #f5ba34"></span></div></div>
+              </div>
+            </div>
+
+            <div class="section-head">
+              <h2>裝備</h2>
+              <span class="pill">2/6</span>
+            </div>
+            <div class="loadout">
+              <div class="gear-slot">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                  <path d="M25 5l13 8-5 9 5 6-9 15H15l5-16-8-6 7-10 6-6z" fill="#6db6f2" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
+                </svg>
+                星港披風
+              </div>
+              <div class="gear-slot">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                  <path d="M10 34l22-22 6 6-22 22H9z" fill="#f5ba34" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
+                  <path d="M31 9l8 8" stroke="#302a20" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+                專注筆
+              </div>
+              <div class="gear-slot">
+                <svg viewBox="0 0 48 48" aria-hidden="true">
+                  <rect x="11" y="11" width="26" height="26" rx="6" fill="#fff9ed" stroke="#302a20" stroke-width="4"/>
+                  <path d="M18 24h12M24 18v12" stroke="#302a20" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+                空欄位
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="toast" id="toast" role="status" aria-live="polite"></div>
+      </div>
+
+      <nav class="nav" aria-label="主要導覽">
+        <button class="nav-btn active" data-tab="home" aria-label="任務">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 5h16v14H4z"/>
+            <path d="M8 9h8M8 13h5"/>
+          </svg>
+          <span>任務</span>
+        </button>
+        <button class="nav-btn" data-tab="map" aria-label="地圖">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z"/>
+            <path d="M9 3v15M15 6v15"/>
+          </svg>
+          <span>地圖</span>
+        </button>
+        <button class="nav-btn" data-tab="hero" aria-label="角色">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3l8 4v6c0 5-3 8-8 10-5-2-8-5-8-10V7l8-4z"/>
+            <path d="M9 12l2 2 4-5"/>
+          </svg>
+          <span>角色</span>
+        </button>
+      </nav>
+    </section>
+  </main>
+
+  <script>
+    if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js");
+      });
+    }
+
+    const state = {
+      coins: 420,
+      xp: 430,
+      xpMax: 1000,
+      completed: 0
+    };
+
+    const coinsEl = document.querySelector("#coins");
+    const xpFillEl = document.querySelector("#xpFill");
+    const xpTextEl = document.querySelector("#xpText");
+    const questCountEl = document.querySelector("#questCount");
+    const toastEl = document.querySelector("#toast");
+
+    let toastTimer;
+
+    function renderStats() {
+      coinsEl.textContent = state.coins;
+      xpTextEl.textContent = `${state.xp}/${state.xpMax}`;
+      xpFillEl.style.width = `${Math.min(100, (state.xp / state.xpMax) * 100)}%`;
+      questCountEl.textContent = `${state.completed}/3 完成`;
+    }
+
+    function showToast(message) {
+      clearTimeout(toastTimer);
+      toastEl.textContent = message;
+      toastEl.classList.add("show");
+      toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1500);
+    }
+
+    document.querySelectorAll(".complete-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const card = button.closest(".quest-card");
+        if (card.classList.contains("done")) {
+          showToast("這個任務已經領過獎勵");
+          return;
+        }
+
+        const xp = Number(card.dataset.xp);
+        const coins = Number(card.dataset.coins);
+        state.xp = Math.min(state.xpMax, state.xp + xp);
+        state.coins += coins;
+        state.completed += 1;
+        card.classList.add("done");
+        renderStats();
+        showToast(`獲得 ${xp} XP 和 ${coins} 金幣`);
+      });
+    });
+
+    document.querySelectorAll(".nav-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const tab = button.dataset.tab;
+        document.querySelectorAll(".nav-btn").forEach((item) => item.classList.toggle("active", item === button));
+        document.querySelectorAll(".tab-panel").forEach((panel) => {
+          panel.classList.toggle("active", panel.dataset.panel === tab);
+        });
+      });
+    });
+
+    document.querySelector(".boss-btn").addEventListener("click", () => {
+      if (state.completed >= 3) {
+        showToast("關主挑戰開啟");
+      } else {
+        showToast("再完成任務累積能量");
+      }
+    });
+
+    renderStats();
+  </script>
+</body>
+</html>

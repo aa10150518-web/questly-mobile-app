@@ -1,0 +1,19 @@
+{
+  "name": "Questly",
+  "short_name": "Questly",
+  "description": "遊戲化任務與角色成長 App 原型",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fffaf0",
+  "theme_color": "#f5ba34",
+  "icons": [
+    {
+      "src": "./app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
