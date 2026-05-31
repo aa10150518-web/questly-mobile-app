@@ -3,29 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5ba34">
+  <meta name="theme-color" content="#ffca3a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Questly">
-  <meta name="application-name" content="Questly">
+  <meta name="apple-mobile-web-app-title" content="紙藝Quest">
+  <meta name="application-name" content="紙藝Quest">
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./app-icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="./app-icon.svg">
-  <title>Questly</title>
+  <title>紙藝Quest</title>
   <style>
     :root {
-      --ink: #17181d;
-      --panel: #fff9ed;
-      --panel-2: #fff3d3;
-      --line: #302a20;
-      --teal: #0b8f8c;
-      --teal-soft: #caefea;
-      --coral: #f25f4c;
-      --gold: #f5ba34;
-      --lime: #79c94e;
-      --sky: #6db6f2;
-      --muted: #6d6458;
-      --shadow: 0 12px 0 rgba(23, 24, 29, .18);
+      --ink: #211d18;
+      --paper: #fff8e7;
+      --paper-2: #f9ebc6;
+      --line: #2d261d;
+      --gold: #ffca3a;
+      --orange: #ff7a45;
+      --rose: #e84a5f;
+      --teal: #159c8c;
+      --mint: #a6e3d4;
+      --sky: #69b7ff;
+      --leaf: #74bf45;
+      --muted: #6f665b;
+      --shadow: 0 7px 0 rgba(33, 29, 24, .18);
     }
 
     * {
@@ -34,14 +35,14 @@
 
     html,
     body {
-      min-height: 100%;
       margin: 0;
+      min-height: 100%;
       font-family: Inter, "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
       color: var(--ink);
       background:
-        linear-gradient(135deg, rgba(245, 186, 52, .18) 25%, transparent 25%) 0 0 / 28px 28px,
-        linear-gradient(225deg, rgba(11, 143, 140, .14) 25%, transparent 25%) 0 0 / 28px 28px,
-        #eef7ef;
+        linear-gradient(135deg, rgba(21, 156, 140, .16) 25%, transparent 25%) 0 0 / 30px 30px,
+        linear-gradient(225deg, rgba(255, 202, 58, .22) 25%, transparent 25%) 0 0 / 30px 30px,
+        #f5f2e8;
       letter-spacing: 0;
     }
 
@@ -61,541 +62,543 @@
     }
 
     .phone {
-      width: min(100%, 420px);
+      width: min(calc(100vw - 36px), 430px);
       height: min(900px, calc(100vh - 36px));
       min-height: 720px;
-      border: 4px solid var(--line);
-      border-radius: 34px;
-      background: #fffaf0;
-      box-shadow: 0 18px 0 rgba(23, 24, 29, .25), 0 28px 50px rgba(23, 24, 29, .22);
-      overflow: hidden;
       display: grid;
       grid-template-rows: auto 1fr auto;
+      border: 4px solid var(--line);
+      border-radius: 34px;
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: 0 18px 0 rgba(33, 29, 24, .24), 0 30px 50px rgba(33, 29, 24, .2);
       position: relative;
     }
 
     .topbar {
-      padding: 18px 16px 10px;
-      background:
-        linear-gradient(180deg, rgba(109, 182, 242, .42), transparent 78%),
-        #fef3d2;
+      padding: 16px 16px 12px;
       border-bottom: 3px solid var(--line);
+      background:
+        radial-gradient(circle at 88% 15%, rgba(255, 122, 69, .22), transparent 32%),
+        linear-gradient(180deg, #fff5d6, #f9ebc6);
     }
 
-    .status {
-      display: flex;
-      justify-content: space-between;
+    .hero-row {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr) auto;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 12px;
     }
 
-    .profile {
-      display: grid;
-      grid-template-columns: 48px minmax(0, 1fr);
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
     .avatar {
-      width: 48px;
-      height: 48px;
+      width: 54px;
+      height: 54px;
       border: 3px solid var(--line);
-      border-radius: 14px;
-      background: var(--teal-soft);
-      box-shadow: 0 4px 0 rgba(23, 24, 29, .18);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 4px 0 rgba(33, 29, 24, .18);
       display: grid;
       place-items: center;
-      overflow: hidden;
     }
 
     .avatar svg {
-      width: 43px;
-      height: 43px;
-      display: block;
+      width: 44px;
+      height: 44px;
     }
 
-    .player-name {
+    .title-block {
+      min-width: 0;
+    }
+
+    .app-name {
       margin: 0 0 4px;
-      font-size: 18px;
-      line-height: 1.1;
-      font-weight: 900;
+      font-size: 20px;
+      line-height: 1;
+      font-weight: 950;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .rank {
+    .subtitle {
       display: flex;
-      align-items: center;
       gap: 6px;
+      align-items: center;
       color: var(--muted);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
     }
 
-    .mini-badge {
-      width: 20px;
-      height: 20px;
-      border: 2px solid var(--line);
-      border-radius: 7px;
-      display: grid;
-      place-items: center;
-      background: var(--gold);
-    }
-
-    .mini-badge svg {
-      width: 12px;
-      height: 12px;
-    }
-
-    .wallet {
-      display: flex;
-      gap: 6px;
-      align-items: center;
+    .streak {
+      min-width: 76px;
       padding: 7px 9px;
-      background: #fff;
       border: 3px solid var(--line);
       border-radius: 14px;
-      box-shadow: 0 4px 0 rgba(23, 24, 29, .18);
-      font-size: 13px;
-      font-weight: 900;
-      flex: 0 0 auto;
+      background: #fff;
+      box-shadow: 0 4px 0 rgba(33, 29, 24, .18);
+      text-align: center;
+      font-size: 12px;
+      font-weight: 950;
     }
 
-    .coin-icon {
-      width: 18px;
-      height: 18px;
-      border: 2px solid var(--line);
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: inset -3px -3px 0 rgba(197, 125, 27, .35);
-    }
-
-    .xp-wrap {
+    .meter-row {
       display: grid;
       grid-template-columns: auto 1fr auto;
-      align-items: center;
       gap: 8px;
+      align-items: center;
       font-size: 12px;
-      font-weight: 900;
+      font-weight: 950;
     }
 
-    .xp-track {
-      height: 14px;
+    .meter {
+      height: 15px;
       border: 3px solid var(--line);
       border-radius: 999px;
-      background: #fff;
       overflow: hidden;
-      box-shadow: inset 0 2px 0 rgba(23, 24, 29, .12);
+      background: #fff;
     }
 
-    .xp-fill {
-      width: 43%;
+    .meter span {
+      display: block;
+      width: 0%;
       height: 100%;
-      background: linear-gradient(90deg, var(--lime), var(--gold), var(--coral));
-      transition: width .25s ease;
+      background: linear-gradient(90deg, var(--leaf), var(--gold), var(--orange), var(--rose));
+      transition: width .24s ease;
     }
 
     .screen {
-      overflow: hidden;
       position: relative;
-      background:
-        linear-gradient(180deg, #fffaf0 0%, #f8f1dc 100%);
+      overflow: hidden;
+      background: linear-gradient(180deg, #fffaf0, #f7efd9);
     }
 
-    .tab-panel {
-      height: 100%;
+    .panel {
       display: none;
+      height: 100%;
       overflow-y: auto;
-      padding: 16px 16px 92px;
+      padding: 15px 15px 94px;
     }
 
-    .tab-panel.active {
+    .panel.active {
       display: block;
     }
 
-    .quest-banner {
+    .daily-hero {
       position: relative;
-      min-height: 154px;
+      min-height: 164px;
+      padding: 15px;
       border: 3px solid var(--line);
-      border-radius: 8px;
-      background: linear-gradient(135deg, #f8ce5d 0%, #f58f4b 52%, #37a99f 100%);
+      border-radius: 10px;
       box-shadow: var(--shadow);
       overflow: hidden;
-      padding: 16px;
-      margin-bottom: 18px;
-    }
-
-    .quest-banner::before {
-      content: "";
-      position: absolute;
-      inset: auto 0 0;
-      height: 54px;
       background:
-        linear-gradient(135deg, transparent 24px, rgba(255, 255, 255, .35) 0 28px, transparent 0) 0 0 / 56px 56px,
-        rgba(23, 24, 29, .08);
+        linear-gradient(135deg, rgba(255, 255, 255, .28) 0 8px, transparent 8px 42px) 0 0 / 58px 58px,
+        linear-gradient(135deg, #ffca3a, #ff8f4f 55%, #159c8c);
     }
 
-    .banner-copy {
+    .daily-copy {
+      max-width: 222px;
       position: relative;
       z-index: 1;
-      max-width: 205px;
     }
 
-    .kicker {
+    .eyebrow {
       margin: 0 0 7px;
       font-size: 12px;
-      font-weight: 900;
-      color: rgba(23, 24, 29, .72);
-      text-transform: uppercase;
+      font-weight: 950;
+      color: rgba(33, 29, 24, .75);
     }
 
-    .banner-copy h1 {
+    .daily-copy h1 {
       margin: 0;
-      font-size: 28px;
+      font-size: 26px;
       line-height: 1.02;
       letter-spacing: 0;
     }
 
-    .banner-copy p {
+    .daily-copy p {
       margin: 8px 0 0;
       font-size: 13px;
       line-height: 1.35;
-      font-weight: 800;
-      color: rgba(23, 24, 29, .78);
+      font-weight: 850;
+      color: rgba(33, 29, 24, .78);
     }
 
-    .map-art {
+    .paper-dragon {
       position: absolute;
-      right: -8px;
-      bottom: 2px;
-      width: 170px;
-      height: 142px;
-      z-index: 1;
+      right: -10px;
+      bottom: -2px;
+      width: 174px;
+      height: 144px;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin: 14px 0 4px;
+    }
+
+    .score-box {
+      min-height: 70px;
+      padding: 8px 5px;
+      border: 3px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      box-shadow: 0 5px 0 rgba(33, 29, 24, .16);
+      text-align: center;
+      display: grid;
+      align-content: center;
+      gap: 3px;
+    }
+
+    .score-box strong {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .score-box span {
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--muted);
     }
 
     .section-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       margin: 20px 0 10px;
     }
 
     .section-head h2 {
       margin: 0;
       font-size: 17px;
-      line-height: 1.1;
+      line-height: 1;
     }
 
-    .pill {
-      padding: 6px 9px;
+    .pill,
+    .mini-btn {
+      padding: 7px 10px;
       border: 2px solid var(--line);
       border-radius: 999px;
       background: #fff;
+      box-shadow: 0 3px 0 rgba(33, 29, 24, .14);
       font-size: 12px;
-      font-weight: 900;
-      box-shadow: 0 3px 0 rgba(23, 24, 29, .16);
+      font-weight: 950;
       white-space: nowrap;
     }
 
-    .quests {
+    .quest-list {
       display: grid;
       gap: 10px;
     }
 
-    .quest-card {
+    .quest {
       display: grid;
-      grid-template-columns: 46px minmax(0, 1fr) 44px;
-      align-items: center;
+      grid-template-columns: 48px minmax(0, 1fr) auto;
       gap: 10px;
-      min-height: 82px;
+      align-items: center;
+      min-height: 92px;
       padding: 10px;
-      background: #fff;
       border: 3px solid var(--line);
-      border-radius: 8px;
-      box-shadow: 0 6px 0 rgba(23, 24, 29, .16);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: var(--shadow);
       transition: transform .16s ease, box-shadow .16s ease, opacity .2s ease;
     }
 
-    .quest-card.done {
-      opacity: .72;
+    .quest.done {
+      opacity: .68;
       transform: translateY(3px);
-      box-shadow: 0 3px 0 rgba(23, 24, 29, .16);
+      box-shadow: 0 3px 0 rgba(33, 29, 24, .16);
     }
 
-    .quest-mark {
-      width: 46px;
-      height: 46px;
+    .mark {
+      width: 48px;
+      height: 48px;
       border: 3px solid var(--line);
-      border-radius: 8px;
+      border-radius: 11px;
+      background: var(--paper-2);
       display: grid;
       place-items: center;
-      background: var(--panel-2);
     }
 
-    .quest-mark svg {
-      width: 25px;
-      height: 25px;
-      stroke-width: 3;
+    .mark svg {
+      width: 28px;
+      height: 28px;
+      stroke-width: 3.2;
     }
 
-    .quest-info {
-      min-width: 0;
-    }
-
-    .quest-info h3 {
+    .quest h3 {
       margin: 0 0 5px;
       font-size: 15px;
-      line-height: 1.2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      line-height: 1.16;
     }
 
-    .reward-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 900;
+    .quest p {
+      margin: 0;
       color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 800;
     }
 
-    .complete-btn {
-      width: 44px;
-      height: 44px;
+    .go {
+      width: 52px;
+      height: 48px;
       border: 3px solid var(--line);
-      border-radius: 12px;
-      background: var(--lime);
-      box-shadow: 0 4px 0 rgba(23, 24, 29, .2);
+      border-radius: 14px;
+      background: var(--leaf);
+      box-shadow: 0 4px 0 rgba(33, 29, 24, .2);
       display: grid;
       place-items: center;
       transition: transform .12s ease, box-shadow .12s ease, background .2s ease;
     }
 
-    .complete-btn:active {
+    .go:active,
+    .mini-btn:active,
+    .fold-btn:active,
+    .nav-btn:active {
       transform: translateY(3px);
-      box-shadow: 0 1px 0 rgba(23, 24, 29, .2);
+      box-shadow: 0 1px 0 rgba(33, 29, 24, .2);
     }
 
-    .quest-card.done .complete-btn {
-      background: #dad5c8;
+    .quest.done .go {
+      background: #d9d2c1;
     }
 
-    .complete-btn svg {
-      width: 22px;
-      height: 22px;
+    .go svg {
+      width: 24px;
+      height: 24px;
       stroke-width: 4;
     }
 
-    .loot-grid {
+    .fold-game {
+      border: 3px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      padding: 12px;
+    }
+
+    .fold-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 70px;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .paper-preview {
+      min-height: 96px;
+      border: 3px solid var(--line);
+      border-radius: 9px;
+      background:
+        linear-gradient(135deg, transparent 42%, rgba(33, 29, 24, .2) 42% 45%, transparent 45%),
+        linear-gradient(45deg, transparent 47%, rgba(255, 122, 69, .42) 47% 52%, transparent 52%),
+        #fff8e7;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .paper-preview::after {
+      content: "";
+      position: absolute;
+      inset: 18px 34px 16px 34px;
+      background: linear-gradient(135deg, #fff, #a6e3d4);
+      clip-path: polygon(50% 0, 100% 55%, 67% 55%, 67% 100%, 33% 100%, 33% 55%, 0 55%);
+      border: 3px solid var(--line);
+    }
+
+    .fold-count {
+      height: 70px;
+      border: 3px solid var(--line);
+      border-radius: 14px;
+      background: var(--gold);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 950;
+      box-shadow: 0 4px 0 rgba(33, 29, 24, .16);
+    }
+
+    .sequence {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin: 12px 0 10px;
+    }
+
+    .seq-chip {
+      padding: 5px 8px;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: #fff2c2;
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .seq-chip.hit {
+      background: var(--mint);
+    }
+
+    .fold-actions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .fold-btn {
+      min-height: 44px;
+      border: 3px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 4px 0 rgba(33, 29, 24, .17);
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .map {
+      display: grid;
+      gap: 10px;
+    }
+
+    .stage-card {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 76px;
+      padding: 10px;
+      border: 3px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 5px 0 rgba(33, 29, 24, .15);
+    }
+
+    .stage-card.locked {
+      opacity: .55;
+      background: #f2ebdc;
+    }
+
+    .stage-badge {
+      width: 46px;
+      height: 46px;
+      border: 3px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--mint);
+      font-weight: 950;
+    }
+
+    .stage-card h3 {
+      margin: 0 0 4px;
+      font-size: 15px;
+    }
+
+    .stage-card p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 850;
+    }
+
+    .inventory {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
 
     .loot {
-      min-height: 92px;
-      padding: 9px;
-      border: 3px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      box-shadow: 0 6px 0 rgba(23, 24, 29, .16);
-      display: grid;
-      align-content: space-between;
-      gap: 6px;
-    }
-
-    .loot-art {
-      height: 38px;
-      display: grid;
-      place-items: center;
-    }
-
-    .loot-art svg {
-      width: 36px;
-      height: 36px;
-    }
-
-    .loot strong {
-      display: block;
-      font-size: 12px;
-      line-height: 1.15;
-      text-align: center;
-    }
-
-    .map-card {
-      border: 3px solid var(--line);
-      border-radius: 8px;
-      background: #d7f0dc;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      min-height: 430px;
-      position: relative;
-    }
-
-    .path-map {
-      width: 100%;
-      height: 430px;
-      display: block;
-    }
-
-    .map-note {
-      position: absolute;
-      left: 13px;
-      right: 13px;
-      bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 12px;
-      border: 3px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, .92);
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .boss-btn {
-      width: 42px;
-      height: 42px;
-      border: 3px solid var(--line);
-      border-radius: 12px;
-      background: var(--coral);
-      display: grid;
-      place-items: center;
-      box-shadow: 0 4px 0 rgba(23, 24, 29, .2);
-      flex: 0 0 auto;
-    }
-
-    .boss-btn svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    .hero-panel {
-      border: 3px solid var(--line);
-      border-radius: 8px;
-      background: #fff;
-      box-shadow: var(--shadow);
-      padding: 14px;
-    }
-
-    .hero-top {
-      display: grid;
-      grid-template-columns: 96px minmax(0, 1fr);
-      gap: 14px;
-      align-items: center;
-    }
-
-    .big-avatar {
-      width: 96px;
-      height: 96px;
-      border: 3px solid var(--line);
-      border-radius: 18px;
-      background: linear-gradient(180deg, #caefea, #fff3d3);
-      display: grid;
-      place-items: center;
-      box-shadow: 0 7px 0 rgba(23, 24, 29, .16);
-    }
-
-    .big-avatar svg {
-      width: 84px;
-      height: 84px;
-    }
-
-    .hero-stats h2 {
-      margin: 0 0 8px;
-      font-size: 22px;
-      line-height: 1.1;
-    }
-
-    .stat-row {
-      display: grid;
-      grid-template-columns: 70px 1fr;
-      align-items: center;
-      gap: 8px;
-      margin: 8px 0;
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .stat-track {
-      height: 12px;
-      border: 2px solid var(--line);
-      border-radius: 999px;
-      background: #fff4df;
-      overflow: hidden;
-    }
-
-    .stat-track span {
-      display: block;
-      height: 100%;
-      background: var(--teal);
-    }
-
-    .loadout {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 18px;
-    }
-
-    .gear-slot {
-      min-height: 96px;
+      min-height: 102px;
       padding: 10px 8px;
-      border: 3px dashed rgba(48, 42, 32, .55);
-      border-radius: 8px;
-      background: #fff9ed;
+      border: 3px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 5px 0 rgba(33, 29, 24, .15);
       display: grid;
       place-items: center;
       text-align: center;
       gap: 6px;
       font-size: 12px;
-      font-weight: 900;
+      font-weight: 950;
     }
 
-    .gear-slot svg {
-      width: 34px;
-      height: 34px;
+    .loot svg {
+      width: 38px;
+      height: 38px;
+    }
+
+    .coach-card {
+      border: 3px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      padding: 13px;
+    }
+
+    .coach-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .coach-card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 820;
+    }
+
+    .prompt-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .prompt {
+      padding: 10px;
+      border: 2px solid var(--line);
+      border-radius: 9px;
+      background: #fff8e7;
+      font-size: 13px;
+      font-weight: 850;
+      text-align: left;
     }
 
     .toast {
       position: absolute;
-      left: 16px;
-      right: 16px;
+      left: 14px;
+      right: 14px;
       bottom: 82px;
-      min-height: 48px;
+      z-index: 5;
       display: none;
+      min-height: 50px;
       align-items: center;
       justify-content: center;
-      padding: 10px 14px;
+      padding: 10px 12px;
       border: 3px solid var(--line);
-      border-radius: 8px;
+      border-radius: 10px;
       background: #fff;
-      box-shadow: 0 6px 0 rgba(23, 24, 29, .2);
-      font-weight: 900;
-      z-index: 5;
+      box-shadow: 0 6px 0 rgba(33, 29, 24, .2);
       text-align: center;
+      font-weight: 950;
     }
 
     .toast.show {
       display: flex;
-      animation: pop .22s ease;
+      animation: pop .18s ease;
     }
 
     @keyframes pop {
       from {
-        transform: translateY(8px) scale(.96);
         opacity: 0;
+        transform: translateY(10px) scale(.96);
       }
       to {
-        transform: translateY(0) scale(1);
         opacity: 1;
+        transform: translateY(0) scale(1);
       }
     }
 
@@ -605,23 +608,28 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
       padding: 9px 12px 12px;
-      background: #fff9ed;
       border-top: 3px solid var(--line);
+      background: #fff8e7;
     }
 
     .nav-btn {
+      display: grid;
+      grid-template-rows: 24px auto;
+      place-items: center;
+      gap: 2px;
+      min-width: 0;
       border: 3px solid var(--line);
       border-radius: 16px;
       background: #fff;
-      box-shadow: 0 5px 0 rgba(23, 24, 29, .18);
-      display: grid;
-      grid-template-rows: 25px auto;
-      place-items: center;
-      gap: 1px;
+      box-shadow: 0 5px 0 rgba(33, 29, 24, .17);
       font-size: 11px;
-      font-weight: 900;
-      min-width: 0;
-      transition: transform .12s ease, box-shadow .12s ease, background .16s ease;
+      font-weight: 950;
+    }
+
+    .nav-btn.active {
+      background: var(--gold);
+      transform: translateY(3px);
+      box-shadow: 0 2px 0 rgba(33, 29, 24, .17);
     }
 
     .nav-btn svg {
@@ -630,24 +638,13 @@
       stroke-width: 3;
     }
 
-    .nav-btn.active {
-      background: var(--gold);
-      transform: translateY(3px);
-      box-shadow: 0 2px 0 rgba(23, 24, 29, .18);
-    }
-
-    .nav-btn:active {
-      transform: translateY(4px);
-      box-shadow: 0 1px 0 rgba(23, 24, 29, .18);
-    }
-
     @media (max-width: 430px) {
       .stage {
         padding: 0;
       }
 
       .phone {
-        width: 100%;
+        width: 100vw;
         height: 100vh;
         min-height: 680px;
         border: 0;
@@ -655,259 +652,245 @@
         box-shadow: none;
       }
 
-      .quest-banner {
-        min-height: 148px;
+      .topbar {
+        padding-left: 14px;
+        padding-right: 14px;
       }
 
-      .map-art {
-        width: 152px;
-        right: -18px;
+      .hero-row {
+        grid-template-columns: 50px minmax(0, 1fr) auto;
+      }
+
+      .avatar {
+        width: 50px;
+        height: 50px;
+      }
+
+      .avatar svg {
+        width: 40px;
+        height: 40px;
+      }
+
+      .app-name {
+        font-size: 18px;
+      }
+
+      .subtitle {
+        font-size: 11px;
+      }
+
+      .streak {
+        min-width: 66px;
+        padding-left: 6px;
+        padding-right: 6px;
+        font-size: 11px;
+      }
+
+      .daily-copy {
+        max-width: 205px;
+      }
+
+      .daily-copy h1 {
+        font-size: 24px;
+      }
+
+      .paper-dragon {
+        right: -38px;
+        width: 150px;
+      }
+
+      .score-grid {
+        gap: 7px;
+      }
+
+      .score-box {
+        min-height: 66px;
+      }
+
+      .quest {
+        grid-template-columns: 48px minmax(0, 1fr) 50px;
       }
     }
   </style>
 </head>
 <body>
   <main class="stage">
-    <section class="phone" aria-label="Questly 手機 App 原型">
+    <section class="phone" aria-label="紙藝Quest 手機 App">
       <header class="topbar">
-        <div class="status">
-          <div class="profile">
-            <div class="avatar" aria-hidden="true">
-              <svg viewBox="0 0 64 64" role="img">
-                <path d="M32 5l20 9v16c0 13-8 23-20 29C20 53 12 43 12 30V14l20-9z" fill="#f5ba34" stroke="#302a20" stroke-width="4"/>
-                <path d="M22 31c2-6 5-9 10-9s8 3 10 9c-2 5-5 8-10 8s-8-3-10-8z" fill="#fff9ed" stroke="#302a20" stroke-width="3"/>
-                <circle cx="32" cy="31" r="5" fill="#0b8f8c" stroke="#302a20" stroke-width="3"/>
-              </svg>
-            </div>
-            <div>
-              <p class="player-name">小隊長 Kai</p>
-              <div class="rank">
-                <span class="mini-badge" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3z"/>
-                  </svg>
-                </span>
-                Lv. 7 星港探險家
-              </div>
+        <div class="hero-row">
+          <div class="avatar" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <path d="M10 41 32 8l22 33-22 14-22-14Z" fill="#ffca3a" stroke="#2d261d" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M32 8v47M10 41h44" fill="none" stroke="#2d261d" stroke-width="4" stroke-linecap="round"/>
+              <path d="M32 55 20 31l12 7 12-7-12 24Z" fill="#a6e3d4" stroke="#2d261d" stroke-width="4" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="title-block">
+            <p class="app-name">紙藝Quest</p>
+            <div class="subtitle">
+              <span id="levelText">Lv.1 紙花學徒</span>
+              <span>今日闖關</span>
             </div>
           </div>
-          <div class="wallet" aria-live="polite">
-            <span class="coin-icon" aria-hidden="true"></span>
-            <span id="coins">420</span>
-          </div>
+          <div class="streak"><span id="streakText">連續 1 天</span></div>
         </div>
-        <div class="xp-wrap">
-          <span>XP</span>
-          <div class="xp-track" aria-label="等級進度">
-            <div class="xp-fill" id="xpFill"></div>
-          </div>
-          <span id="xpText">430/1000</span>
+        <div class="meter-row">
+          <span>進度</span>
+          <div class="meter" aria-label="今日關卡進度"><span id="xpFill"></span></div>
+          <span id="xpText">0/700</span>
         </div>
       </header>
 
       <div class="screen">
-        <section class="tab-panel active" data-panel="home">
-          <div class="quest-banner">
-            <div class="banner-copy">
-              <p class="kicker">今日主線</p>
-              <h1>清空三個任務格</h1>
-              <p>完成任務就能推進地圖，解鎖裝備和每日寶箱。</p>
+        <section class="panel active" data-panel="today">
+          <div class="daily-hero">
+            <div class="daily-copy">
+              <p class="eyebrow">今日主線</p>
+              <h1>讓紙花港重新開張</h1>
+              <p>做作品、發文、找 AI 激發靈感，把今天的紙藝能量灌進關卡。</p>
             </div>
-            <svg class="map-art" viewBox="0 0 170 142" aria-hidden="true">
-              <path d="M14 116c32-36 45-6 73-37s44-42 74-17" fill="none" stroke="#302a20" stroke-width="8" stroke-linecap="round" stroke-dasharray="2 17"/>
-              <circle cx="28" cy="105" r="15" fill="#fff9ed" stroke="#302a20" stroke-width="4"/>
-              <circle cx="84" cy="78" r="15" fill="#caefea" stroke="#302a20" stroke-width="4"/>
-              <circle cx="139" cy="51" r="20" fill="#f25f4c" stroke="#302a20" stroke-width="4"/>
-              <path d="M134 30l6-14 6 14 15 2-11 10 3 15-13-8-13 8 3-15-11-10 15-2z" fill="#f5ba34" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
+            <svg class="paper-dragon" viewBox="0 0 180 150" aria-hidden="true">
+              <path d="M22 101c38-42 52-15 84-48 22-22 39-30 58-22" fill="none" stroke="#2d261d" stroke-width="8" stroke-linecap="round" stroke-dasharray="2 17"/>
+              <path d="M30 91 70 42l14 45-38 29-16-25Z" fill="#fff8e7" stroke="#2d261d" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M84 87 126 31l28 30-44 31-26-5Z" fill="#a6e3d4" stroke="#2d261d" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M133 25 166 9l-8 37 18 18-37 2-20 29-5-39-31-21 50-10Z" fill="#ffca3a" stroke="#2d261d" stroke-width="4" stroke-linejoin="round"/>
+              <circle cx="151" cy="36" r="4" fill="#2d261d"/>
             </svg>
           </div>
 
+          <div class="score-grid">
+            <div class="score-box"><strong id="scoreText">0</strong><span>今日分</span></div>
+            <div class="score-box"><strong id="comboText">x1</strong><span>連擊</span></div>
+            <div class="score-box"><strong id="coinText">0</strong><span>紙星</span></div>
+            <div class="score-box"><strong id="foldText">0</strong><span>摺痕</span></div>
+          </div>
+
           <div class="section-head">
-            <h2>任務板</h2>
-            <span class="pill" id="questCount">0/3 完成</span>
+            <h2>今日試煉</h2>
+            <span class="pill" id="doneText">0/5 完成</span>
           </div>
 
-          <div class="quests" id="questList">
-            <article class="quest-card" data-xp="120" data-coins="40">
-              <div class="quest-mark" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#0b8f8c" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 19V5m0 0h14l-2.5 4L18 13H4"/>
-                </svg>
+          <div class="quest-list" id="questList">
+            <article class="quest" data-id="craft" data-score="140" data-coins="30" data-folds="2">
+              <div class="mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#159c8c" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 12 4l8 14-8 4-8-4Z"/><path d="M12 4v18M4 18h16"/></svg>
               </div>
-              <div class="quest-info">
-                <h3>完成 25 分鐘專注</h3>
-                <div class="reward-row"><span>+120 XP</span><span>+40 金幣</span></div>
+              <div>
+                <h3>完成今天的紙藝作品</h3>
+                <p>作品不用完美，完成就給最高主線分。+140 分</p>
               </div>
-              <button class="complete-btn" aria-label="完成任務">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 6L9 17l-5-5"/>
-                </svg>
+              <button class="go" aria-label="完成作品">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2d261d" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
               </button>
             </article>
 
-            <article class="quest-card" data-xp="90" data-coins="30">
-              <div class="quest-mark" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#f25f4c" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 3v18M5 8h14M7 16h10"/>
-                </svg>
+            <article class="quest" data-id="post" data-score="95" data-coins="22" data-folds="1">
+              <div class="mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#e84a5f" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5M16 17l4 4"/></svg>
               </div>
-              <div class="quest-info">
-                <h3>喝水 4 次</h3>
-                <div class="reward-row"><span>+90 XP</span><span>+30 金幣</span></div>
+              <div>
+                <h3>發文紀錄作品</h3>
+                <p>照片、過程、失敗心得都算。+95 分</p>
               </div>
-              <button class="complete-btn" aria-label="完成任務">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 6L9 17l-5-5"/>
-                </svg>
+              <button class="go" aria-label="完成發文">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2d261d" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
               </button>
             </article>
 
-            <article class="quest-card" data-xp="160" data-coins="55">
-              <div class="quest-mark" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#6db6f2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 7h16M6 7v11h12V7M9 7V5h6v2M9 11h6M9 15h4"/>
-                </svg>
+            <article class="quest" data-id="ai" data-score="85" data-coins="18" data-folds="1">
+              <div class="mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#69b7ff" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.9 4.9 7 7M17 17l2.1 2.1M3 12h3M18 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/><circle cx="12" cy="12" r="4"/></svg>
               </div>
-              <div class="quest-info">
-                <h3>整理今日待辦</h3>
-                <div class="reward-row"><span>+160 XP</span><span>+55 金幣</span></div>
+              <div>
+                <h3>跟 AI 聊一次紙藝點子</h3>
+                <p>問配色、標題、下一個作品方向。+85 分</p>
               </div>
-              <button class="complete-btn" aria-label="完成任務">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 6L9 17l-5-5"/>
-                </svg>
+              <button class="go" aria-label="完成 AI 對話">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2d261d" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </button>
+            </article>
+
+            <article class="quest" data-id="reply" data-score="65" data-coins="14" data-folds="1">
+              <div class="mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ff7a45" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/><path d="M8 9h8M8 13h5"/></svg>
+              </div>
+              <div>
+                <h3>回覆留言或互動</h3>
+                <p>讓作品被看見，回一則也算。+65 分</p>
+              </div>
+              <button class="go" aria-label="完成互動">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2d261d" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              </button>
+            </article>
+
+            <article class="quest" data-id="learn" data-score="55" data-coins="12" data-folds="1">
+              <div class="mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#74bf45" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/></svg>
+              </div>
+              <div>
+                <h3>收藏一個靈感或教學</h3>
+                <p>明天的作品種子。+55 分</p>
+              </div>
+              <button class="go" aria-label="完成學習">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#2d261d" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
               </button>
             </article>
           </div>
+
+          <div class="section-head">
+            <h2>摺紙小戰鬥</h2>
+            <span class="pill" id="foldBonus">連段 +0</span>
+          </div>
+          <div class="fold-game">
+            <div class="fold-top">
+              <div class="paper-preview" aria-hidden="true"></div>
+              <div class="fold-count"><span id="foldStage">0/4<br>步驟</span></div>
+            </div>
+            <div class="sequence" id="sequence"></div>
+            <div class="fold-actions">
+              <button class="fold-btn" data-move="山折">山折</button>
+              <button class="fold-btn" data-move="谷折">谷折</button>
+              <button class="fold-btn" data-move="壓平">壓平</button>
+              <button class="fold-btn" data-move="翻面">翻面</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" data-panel="map">
+          <div class="section-head">
+            <h2>紙藝地圖</h2>
+            <button class="mini-btn" id="claimChest">開今日寶箱</button>
+          </div>
+          <div class="map" id="stageMap"></div>
 
           <div class="section-head">
             <h2>今日掉落</h2>
-            <span class="pill">3 件可解鎖</span>
+            <span class="pill" id="lootCount">0 件</span>
           </div>
-
-          <div class="loot-grid">
-            <div class="loot">
-              <div class="loot-art" aria-hidden="true">
-                <svg viewBox="0 0 48 48">
-                  <path d="M8 17h32v22H8z" fill="#f5ba34" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
-                  <path d="M5 13h38v9H5z" fill="#f25f4c" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
-                  <path d="M24 13v26" stroke="#302a20" stroke-width="4"/>
-                </svg>
-              </div>
-              <strong>寶箱券</strong>
-            </div>
-            <div class="loot">
-              <div class="loot-art" aria-hidden="true">
-                <svg viewBox="0 0 48 48">
-                  <path d="M24 5l15 9v12c0 9-6 15-15 18C15 41 9 35 9 26V14l15-9z" fill="#caefea" stroke="#302a20" stroke-width="4"/>
-                  <path d="M18 25l4 4 9-11" fill="none" stroke="#302a20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <strong>護盾</strong>
-            </div>
-            <div class="loot">
-              <div class="loot-art" aria-hidden="true">
-                <svg viewBox="0 0 48 48">
-                  <path d="M16 29L32 9l-3 15h9L22 44l3-15z" fill="#f5ba34" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <strong>加速石</strong>
-            </div>
-          </div>
+          <div class="inventory" id="inventory"></div>
         </section>
 
-        <section class="tab-panel" data-panel="map">
+        <section class="panel" data-panel="coach">
           <div class="section-head">
-            <h2>冒險地圖</h2>
-            <span class="pill">第 2 區</span>
+            <h2>AI 靈感室</h2>
+            <button class="mini-btn" id="resetDay">重置今天</button>
           </div>
-          <div class="map-card">
-            <svg class="path-map" viewBox="0 0 360 430" aria-label="任務地圖">
-              <rect width="360" height="430" fill="#d7f0dc"/>
-              <path d="M-20 326c54-29 78-20 123-47 52-31 49-69 103-91 48-20 84-1 174-60" fill="none" stroke="#fff9ed" stroke-width="48" stroke-linecap="round"/>
-              <path d="M-20 326c54-29 78-20 123-47 52-31 49-69 103-91 48-20 84-1 174-60" fill="none" stroke="#302a20" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 18"/>
-              <path d="M20 352l52-42 18 29 44-59 28 32 58-80 42 24 75-93" fill="none" stroke="#0b8f8c" stroke-width="8" stroke-linecap="round" opacity=".35"/>
-              <g>
-                <circle cx="52" cy="309" r="24" fill="#79c94e" stroke="#302a20" stroke-width="4"/>
-                <path d="M42 309l7 7 15-17" fill="none" stroke="#302a20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              <g>
-                <circle cx="132" cy="266" r="24" fill="#79c94e" stroke="#302a20" stroke-width="4"/>
-                <path d="M122 266l7 7 15-17" fill="none" stroke="#302a20" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              </g>
-              <g>
-                <circle cx="206" cy="190" r="27" fill="#f5ba34" stroke="#302a20" stroke-width="4"/>
-                <path d="M206 174l5 11 12 2-9 8 2 13-10-6-11 6 2-13-9-8 12-2 6-11z" fill="#fff9ed" stroke="#302a20" stroke-width="3" stroke-linejoin="round"/>
-              </g>
-              <g>
-                <circle cx="304" cy="142" r="31" fill="#f25f4c" stroke="#302a20" stroke-width="4"/>
-                <path d="M292 150c7-20 17-20 24 0" fill="none" stroke="#302a20" stroke-width="4" stroke-linecap="round"/>
-                <circle cx="296" cy="136" r="3" fill="#302a20"/>
-                <circle cx="312" cy="136" r="3" fill="#302a20"/>
-              </g>
-              <path d="M13 83c21-11 36-8 50 9 21-32 50-37 86-17 17-35 54-43 91-20 30-31 64-30 103 1" fill="none" stroke="#6db6f2" stroke-width="30" stroke-linecap="round" opacity=".45"/>
-              <path d="M31 99h53M189 65h76M270 83h56" stroke="#302a20" stroke-width="5" stroke-linecap="round" opacity=".2"/>
-            </svg>
-            <div class="map-note">
-              <span>再完成 2 個任務挑戰關主</span>
-              <button class="boss-btn" aria-label="挑戰關主">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M13 2L4 14h8l-1 8 9-12h-8l1-8z"/>
-                </svg>
-              </button>
+          <div class="coach-card">
+            <h3>今天可以問 AI 的 3 個問題</h3>
+            <p>點一張提示卡代表你完成一次 AI 對話。建議真的拿去問 AI，讓遊戲分數和創作行動綁在一起。</p>
+            <div class="prompt-list">
+              <button class="prompt">幫我把今天的紙藝作品取 5 個可愛標題。</button>
+              <button class="prompt">我想做一個更容易被收藏的紙藝教學，步驟怎麼排？</button>
+              <button class="prompt">請給我 3 個適合明天拍短影片的紙藝題材。</button>
             </div>
           </div>
-        </section>
 
-        <section class="tab-panel" data-panel="hero">
           <div class="section-head">
-            <h2>角色</h2>
-            <span class="pill">戰力 1840</span>
+            <h2>上癮機制設計</h2>
+            <span class="pill">新版</span>
           </div>
-          <div class="hero-panel">
-            <div class="hero-top">
-              <div class="big-avatar" aria-hidden="true">
-                <svg viewBox="0 0 96 96">
-                  <path d="M48 8l30 14v24c0 19-12 34-30 43C30 80 18 65 18 46V22L48 8z" fill="#f5ba34" stroke="#302a20" stroke-width="5"/>
-                  <path d="M32 48c3-11 9-16 16-16s13 5 16 16c-3 9-8 14-16 14s-13-5-16-14z" fill="#fff9ed" stroke="#302a20" stroke-width="4"/>
-                  <circle cx="48" cy="48" r="8" fill="#0b8f8c" stroke="#302a20" stroke-width="4"/>
-                  <path d="M25 24l13 9M71 24l-13 9" stroke="#302a20" stroke-width="4" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="hero-stats">
-                <h2>Kai</h2>
-                <div class="stat-row"><span>專注</span><div class="stat-track"><span style="width: 78%"></span></div></div>
-                <div class="stat-row"><span>體力</span><div class="stat-track"><span style="width: 62%; background: #f25f4c"></span></div></div>
-                <div class="stat-row"><span>連擊</span><div class="stat-track"><span style="width: 51%; background: #f5ba34"></span></div></div>
-              </div>
-            </div>
-
-            <div class="section-head">
-              <h2>裝備</h2>
-              <span class="pill">2/6</span>
-            </div>
-            <div class="loadout">
-              <div class="gear-slot">
-                <svg viewBox="0 0 48 48" aria-hidden="true">
-                  <path d="M25 5l13 8-5 9 5 6-9 15H15l5-16-8-6 7-10 6-6z" fill="#6db6f2" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
-                </svg>
-                星港披風
-              </div>
-              <div class="gear-slot">
-                <svg viewBox="0 0 48 48" aria-hidden="true">
-                  <path d="M10 34l22-22 6 6-22 22H9z" fill="#f5ba34" stroke="#302a20" stroke-width="4" stroke-linejoin="round"/>
-                  <path d="M31 9l8 8" stroke="#302a20" stroke-width="4" stroke-linecap="round"/>
-                </svg>
-                專注筆
-              </div>
-              <div class="gear-slot">
-                <svg viewBox="0 0 48 48" aria-hidden="true">
-                  <rect x="11" y="11" width="26" height="26" rx="6" fill="#fff9ed" stroke="#302a20" stroke-width="4"/>
-                  <path d="M18 24h12M24 18v12" stroke="#302a20" stroke-width="4" stroke-linecap="round"/>
-                </svg>
-                空欄位
-              </div>
-            </div>
+          <div class="coach-card">
+            <p>連擊會讓每個任務越後面越值錢；寶箱在 400 分後開啟；700 分完成今日主線；更高分會解鎖紙藝地圖。每天只要想多拿一件掉落，就會多做一個真實創作行動。</p>
           </div>
         </section>
 
@@ -915,26 +898,17 @@
       </div>
 
       <nav class="nav" aria-label="主要導覽">
-        <button class="nav-btn active" data-tab="home" aria-label="任務">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 5h16v14H4z"/>
-            <path d="M8 9h8M8 13h5"/>
-          </svg>
-          <span>任務</span>
+        <button class="nav-btn active" data-tab="today">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2d261d" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
+          <span>今日</span>
         </button>
-        <button class="nav-btn" data-tab="map" aria-label="地圖">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z"/>
-            <path d="M9 3v15M15 6v15"/>
-          </svg>
+        <button class="nav-btn" data-tab="map">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2d261d" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18 3 21V6l6-3 6 3 6-3v15l-6 3-6-3z"/><path d="M9 3v15M15 6v15"/></svg>
           <span>地圖</span>
         </button>
-        <button class="nav-btn" data-tab="hero" aria-label="角色">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#302a20" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 3l8 4v6c0 5-3 8-8 10-5-2-8-5-8-10V7l8-4z"/>
-            <path d="M9 12l2 2 4-5"/>
-          </svg>
-          <span>角色</span>
+        <button class="nav-btn" data-tab="coach">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2d261d" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.9 4.9 7 7M17 17l2.1 2.1M3 12h3M18 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/><circle cx="12" cy="12" r="4"/></svg>
+          <span>AI</span>
         </button>
       </nav>
     </section>
@@ -947,73 +921,214 @@
       });
     }
 
-    const state = {
-      coins: 420,
-      xp: 430,
-      xpMax: 1000,
-      completed: 0
+    const todayKey = `paperQuest:${new Date().toISOString().slice(0, 10)}`;
+    const baseState = {
+      score: 0,
+      coins: 0,
+      folds: 0,
+      combo: 1,
+      done: [],
+      foldIndex: 0,
+      foldBonus: 0,
+      chestClaimed: false,
+      loot: [],
+      aiPromptClaimed: false,
+      streak: 1
     };
+    const state = { ...baseState, ...JSON.parse(localStorage.getItem(todayKey) || "{}") };
 
-    const coinsEl = document.querySelector("#coins");
-    const xpFillEl = document.querySelector("#xpFill");
-    const xpTextEl = document.querySelector("#xpText");
-    const questCountEl = document.querySelector("#questCount");
-    const toastEl = document.querySelector("#toast");
+    const sequence = ["山折", "谷折", "壓平", "翻面"];
+    const stages = [
+      ["紙花港", 0],
+      ["千鶴橋", 260],
+      ["星紙市集", 520],
+      ["剪影塔", 850],
+      ["雲摺神社", 1250],
+      ["終章 展覽會", 1700]
+    ];
+    const lootPool = ["金色摺線", "珍珠紙", "爆款標題卡", "AI 靈感碎片", "展示台", "剪影徽章"];
 
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => [...document.querySelectorAll(selector)];
     let toastTimer;
 
-    function renderStats() {
-      coinsEl.textContent = state.coins;
-      xpTextEl.textContent = `${state.xp}/${state.xpMax}`;
-      xpFillEl.style.width = `${Math.min(100, (state.xp / state.xpMax) * 100)}%`;
-      questCountEl.textContent = `${state.completed}/3 完成`;
+    function save() {
+      localStorage.setItem(todayKey, JSON.stringify(state));
+    }
+
+    function levelName() {
+      if (state.score >= 1700) return "Lv.6 展覽策展人";
+      if (state.score >= 1250) return "Lv.5 雲摺祭司";
+      if (state.score >= 850) return "Lv.4 剪影騎士";
+      if (state.score >= 520) return "Lv.3 星紙設計師";
+      if (state.score >= 260) return "Lv.2 千鶴旅人";
+      return "Lv.1 紙花學徒";
     }
 
     function showToast(message) {
       clearTimeout(toastTimer);
-      toastEl.textContent = message;
-      toastEl.classList.add("show");
-      toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1500);
+      $("#toast").textContent = message;
+      $("#toast").classList.add("show");
+      toastTimer = setTimeout(() => $("#toast").classList.remove("show"), 1700);
     }
 
-    document.querySelectorAll(".complete-btn").forEach((button) => {
+    function award({ score, coins, folds, label }) {
+      const comboBonus = Math.floor(score * (state.combo - 1) * 0.18);
+      state.score += score + comboBonus;
+      state.coins += coins;
+      state.folds += folds;
+      state.combo = Math.min(9, state.combo + 1);
+      showToast(`${label} +${score + comboBonus} 分，連擊 x${state.combo}`);
+      save();
+      render();
+    }
+
+    function render() {
+      const doneCount = state.done.length;
+      $("#scoreText").textContent = state.score;
+      $("#comboText").textContent = `x${state.combo}`;
+      $("#coinText").textContent = state.coins;
+      $("#foldText").textContent = state.folds;
+      $("#doneText").textContent = `${doneCount}/5 完成`;
+      $("#levelText").textContent = levelName();
+      $("#streakText").textContent = `連續 ${state.streak} 天`;
+      $("#xpText").textContent = `${Math.min(state.score, 700)}/700`;
+      $("#xpFill").style.width = `${Math.min(100, state.score / 700 * 100)}%`;
+      $("#foldStage").innerHTML = `${state.foldIndex}/4<br>步驟`;
+      $("#foldBonus").textContent = `連段 +${state.foldBonus}`;
+      $("#lootCount").textContent = `${state.loot.length} 件`;
+
+      $$(".quest").forEach((card) => {
+        card.classList.toggle("done", state.done.includes(card.dataset.id));
+      });
+
+      $("#sequence").innerHTML = sequence.map((move, index) =>
+        `<span class="seq-chip ${index < state.foldIndex ? "hit" : ""}">${move}</span>`
+      ).join("");
+
+      $("#stageMap").innerHTML = stages.map(([name, need], index) => {
+        const unlocked = state.score >= need;
+        return `
+          <article class="stage-card ${unlocked ? "" : "locked"}">
+            <div class="stage-badge">${unlocked ? index + 1 : "鎖"}</div>
+            <div>
+              <h3>${name}</h3>
+              <p>${unlocked ? "已解鎖，繼續累積今日展覽能量" : `需要 ${need} 分解鎖`}</p>
+            </div>
+            <span class="pill">${unlocked ? "開放" : "未開"}</span>
+          </article>
+        `;
+      }).join("");
+
+      const lootItems = state.loot.length ? state.loot : ["尚未掉落", "400 分寶箱", "連擊獎勵"];
+      $("#inventory").innerHTML = lootItems.map((item) => `
+        <div class="loot">
+          <svg viewBox="0 0 48 48" aria-hidden="true">
+            <path d="M8 16h32v24H8z" fill="#ffca3a" stroke="#2d261d" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M5 12h38v10H5z" fill="#ff7a45" stroke="#2d261d" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M24 12v28" stroke="#2d261d" stroke-width="4"/>
+          </svg>
+          ${item}
+        </div>
+      `).join("");
+    }
+
+    $$(".go").forEach((button) => {
       button.addEventListener("click", () => {
-        const card = button.closest(".quest-card");
-        if (card.classList.contains("done")) {
-          showToast("這個任務已經領過獎勵");
+        const card = button.closest(".quest");
+        const id = card.dataset.id;
+        if (state.done.includes(id)) {
+          showToast("這個試煉今天已經領過分數");
           return;
         }
-
-        const xp = Number(card.dataset.xp);
-        const coins = Number(card.dataset.coins);
-        state.xp = Math.min(state.xpMax, state.xp + xp);
-        state.coins += coins;
-        state.completed += 1;
-        card.classList.add("done");
-        renderStats();
-        showToast(`獲得 ${xp} XP 和 ${coins} 金幣`);
-      });
-    });
-
-    document.querySelectorAll(".nav-btn").forEach((button) => {
-      button.addEventListener("click", () => {
-        const tab = button.dataset.tab;
-        document.querySelectorAll(".nav-btn").forEach((item) => item.classList.toggle("active", item === button));
-        document.querySelectorAll(".tab-panel").forEach((panel) => {
-          panel.classList.toggle("active", panel.dataset.panel === tab);
+        state.done.push(id);
+        award({
+          score: Number(card.dataset.score),
+          coins: Number(card.dataset.coins),
+          folds: Number(card.dataset.folds),
+          label: card.querySelector("h3").textContent
         });
       });
     });
 
-    document.querySelector(".boss-btn").addEventListener("click", () => {
-      if (state.completed >= 3) {
-        showToast("關主挑戰開啟");
-      } else {
-        showToast("再完成任務累積能量");
-      }
+    $$(".fold-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (state.folds <= 0) {
+          showToast("先完成任務取得摺痕");
+          return;
+        }
+        const expected = sequence[state.foldIndex];
+        if (button.dataset.move !== expected) {
+          state.combo = 1;
+          showToast(`摺錯了，要先 ${expected}`);
+          save();
+          render();
+          return;
+        }
+        state.folds -= 1;
+        state.foldIndex += 1;
+        state.foldBonus += 25;
+        state.score += 25;
+        if (state.foldIndex >= sequence.length) {
+          state.foldIndex = 0;
+          state.score += 100;
+          state.coins += 25;
+          state.loot.push("完成紙鶴連段");
+          showToast("摺紙連段完成，額外 +100 分");
+        } else {
+          showToast(`${expected} 成功，連段 +25`);
+        }
+        save();
+        render();
+      });
     });
 
-    renderStats();
+    $("#claimChest").addEventListener("click", () => {
+      if (state.score < 400) {
+        showToast("400 分開啟今日寶箱");
+        return;
+      }
+      if (state.chestClaimed) {
+        showToast("今日寶箱已經開過");
+        return;
+      }
+      const item = lootPool[(state.score + state.coins + state.done.length) % lootPool.length];
+      state.chestClaimed = true;
+      state.loot.push(item);
+      state.coins += 40;
+      showToast(`寶箱開出：${item}`);
+      save();
+      render();
+    });
+
+    $$(".prompt").forEach((prompt) => {
+      prompt.addEventListener("click", () => {
+        if (state.aiPromptClaimed) {
+          showToast("AI 靈感室今天已經加過一次分");
+          return;
+        }
+        state.aiPromptClaimed = true;
+        state.loot.push("AI 對話卡");
+        award({ score: 85, coins: 18, folds: 1, label: "AI 靈感對話" });
+      });
+    });
+
+    $("#resetDay").addEventListener("click", () => {
+      Object.assign(state, baseState);
+      localStorage.removeItem(todayKey);
+      showToast("今天進度已重置");
+      render();
+    });
+
+    $$(".nav-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const tab = button.dataset.tab;
+        $$(".nav-btn").forEach((item) => item.classList.toggle("active", item === button));
+        $$(".panel").forEach((panel) => panel.classList.toggle("active", panel.dataset.panel === tab));
+      });
+    });
+
+    render();
   </script>
 </body>
 </html>

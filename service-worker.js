@@ -1,4 +1,4 @@
-const CACHE_NAME = "questly-v1";
+const CACHE_NAME = "paper-quest-v2";
 const ASSETS = [
   "./",
   "./index.html",

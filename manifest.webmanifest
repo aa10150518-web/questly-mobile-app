@@ -1,13 +1,13 @@
 {
-  "name": "Questly",
-  "short_name": "Questly",
-  "description": "遊戲化任務與角色成長 App 原型",
+  "name": "紙藝Quest",
+  "short_name": "紙藝Quest",
+  "description": "用紙藝作品、發文、AI 對話與互動分數推進的每日闖關 App",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#fffaf0",
-  "theme_color": "#f5ba34",
+  "theme_color": "#ffca3a",
   "icons": [
     {
       "src": "./app-icon.svg",
